@@ -1,0 +1,80 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Helpers\Helper;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\URL;
+
+class AgendaController extends Controller
+{
+    // Index
+    public function index(Request $request)
+    {
+        $respAgenda = Http::get('https://serumpun.babelprov.go.id/agenda.json/'.$request->tahun.$request->bulan)->json();
+        $img_thumb = asset('images/website/img_agenda.png');
+        $breadcrumbs = [['link' => "/agenda", 'name' => 'Indeks Agenda Kegiatan Pemerintah Provinsi Kepulauan Bangka Belitung']];
+
+        // Meta Tags
+        Helper::setMeta(
+            'agenda_index',
+            URL::to('/').'/agenda?tahun=2022',
+            'Agenda, Events',
+            'Indeks Agenda Kegiatan Pemerintah Provinsi Kepulauan Bangka Belitung',
+            'Agenda Kegiatan di Lingkungan Pemerintah Provinsi Kepulauan Bangka Belitung',
+            asset('images/website/img_agenda.png')
+        );
+
+        return view('/content/agenda/index', [
+            'breadcrumbs' => $breadcrumbs,
+            'data_agenda' => $respAgenda,
+            'img_thumb' => $img_thumb
+        ]);
+    }
+
+    public function getAgendaKegiatan()
+    {
+        $baseUrl   = "https://api.zoom.us/v2";
+        $token     = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6IkZkUHFrbWduU3lDTndreVRIX0dlb1EiLCJleHAiOjE3MDMxNDAzMjAsImlhdCI6MTY3MTU5ODk4MX0.GFQvZ2vvPp4Y-3-ao3hyQr0bdlW_BihpAVr_0DCjCjQ";
+        $type      = "upcoming_meetings";
+        $page_size = "100";
+        $userId0   = "diskominfobabel@gmail.com";
+        $userId1   = "vicon1@babelprov.go.id";
+        $userId2   = "vicon2@babelprov.go.id";
+        $userId3   = "vicon3@babelprov.go.id";
+
+        $response0 = Http::withHeaders([
+            'Authorization' => $token,
+        ])->get($baseUrl.'/users/'.$userId0.'/meetings?type='.$type.'&page_size='.$page_size);
+
+        $response1 = Http::withHeaders([
+            'Authorization' => $token,
+        ])->get($baseUrl.'/users/'.$userId1.'/meetings?type='.$type);
+
+        $response2 = Http::withHeaders([
+            'Authorization' => $token,
+        ])->get($baseUrl.'/users/'.$userId2.'/meetings?type='.$type);
+
+        $response3 = Http::withHeaders([
+            'Authorization' => $token,
+        ])->get($baseUrl.'/users/'.$userId3.'/meetings?type='.$type);
+
+        $response = array_merge($response0['meetings'], $response1['meetings'], $response2['meetings'], $response3['meetings']);
+
+        $response = collect($response)->sortBy('start_time')->toArray();
+
+        $html = [];
+
+        foreach($response as $index => $item){
+            $html[] = [
+                'judul' => $item['topic'],
+                'tanggal' => Helper::meetingDateId($item['start_time']),
+                'waktu' => Helper::meetingTimeId($item['start_time'], $item['duration']),
+                'status' => Helper::meetingStatusId($item['start_time'], $item['duration'])
+            ];
+        }
+
+        return response()->json($html);
+    }
+}

@@ -1,0 +1,158 @@
+<?php
+
+use App\Http\Controllers\AgendaController;
+use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\AnggaranController;
+use App\Http\Controllers\BankDataController;
+use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\Covid19Controller;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KontenController;
+use App\Http\Controllers\LayananSpbeController;
+use App\Http\Controllers\PengumumanController;
+use App\Http\Controllers\PerangkatDaerahController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ProdukHukumController;
+use App\Http\Controllers\PublikasiController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SubKontenController;
+use App\Http\Controllers\TransparansiAnggaranController;
+use App\Http\Controllers\VirtualMeetingController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StaterkitController;
+use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\YoutubeController;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+//Clear Cache
+// Route::get('/clear-cache'. function() {
+//     Artisan::call('cache:clear');
+// });
+
+// Auth::routes();
+Auth::routes(['register' => false]);
+
+// Route::get('/', [StaterkitController::class, 'home'])->name('home');
+// Route::get('home', [StaterkitController::class, 'home'])->name('home');
+// Route Components
+Route::get('layouts/collapsed-menu', [StaterkitController::class, 'collapsed_menu'])->name('collapsed-menu');
+Route::get('layouts/full', [StaterkitController::class, 'layout_full'])->name('layout-full');
+Route::get('layouts/without-menu', [StaterkitController::class, 'without_menu'])->name('without-menu');
+Route::get('layouts/empty', [StaterkitController::class, 'layout_empty'])->name('layout-empty');
+Route::get('layouts/blank', [StaterkitController::class, 'layout_blank'])->name('layout-blank');
+
+// locale Route
+Route::get('lang/{locale}', [LanguageController::class, 'swap']);
+
+// Added by Erman Arif
+Route::group(['middleware' => ['auth']], function() {
+
+    Route::prefix('backend')->group(function () {
+        // PERMISSION
+        Route::get('permissions/data/', [PermissionController::class, 'getData'])->name('permissions.data');
+        Route::resource('permissions', PermissionController::class);
+        Route::get('permissions/{permission}/confirm-delete', [PermissionController::class, 'getModalDelete'])->name('permissions.confirm-delete');
+
+        // ROLES
+        Route::get('roles/data/', [RoleController::class, 'getData'])->name('roles.data');
+        Route::resource('roles', RoleController::class);
+        Route::get('roles/{role}/confirm-delete', [RoleController::class, 'getModalDelete'])->name('roles.confirm-delete');
+
+        // USER
+        Route::get('users/data/', [UserController::class, 'getData'])->name('users.data');
+        Route::resource('users', UserController::class);
+        Route::get('users/{user}/confirm-delete', [UserController::class, 'getModalDelete'])->name('users.confirm-delete');
+
+        // Covid19
+        Route::get('covid19/data/', [Covid19Controller::class, 'getData'])->name('covid19.data');
+        Route::resource('covid19', Covid19Controller::class);
+        Route::get('covid19/{id}/confirm-delete', [Covid19Controller::class, 'getModalDelete'])->name('covid19.confirm-delete');
+
+        // Konten
+        Route::get('konten/data/', [KontenController::class, 'getData'])->name('konten.data');
+        Route::resource('konten', KontenController::class);
+        Route::get('konten/{id}/confirm-delete', [KontenController::class, 'getModalDelete'])->name('konten.confirm-delete');
+
+        // Sub Konten
+        Route::get('sub_konten/data/', [SubKontenController::class, 'getData'])->name('sub_konten.data');
+        Route::resource('sub_konten', SubKontenController::class);
+        Route::get('sub_konten/{id}/confirm-delete', [SubKontenController::class, 'getModalDelete'])->name('sub_konten.confirm-delete');
+
+    });
+
+});
+
+
+
+// Youtube
+Route::get('/api_youtube', [YoutubeController::class, 'getYoutubeApi'])->name('api_youtube');
+
+// Home
+Route::get('/', [HomeController::class, 'home'])->name('home');
+
+// Berita
+Route::get('berita/{kanal}', [BeritaController::class, 'index'])->name('berita-index');
+Route::get('berita_detil/{slug}', [BeritaController::class, 'show'])->name('berita-show');
+
+// Artikel
+Route::get('artikel/{kanal}', [ArtikelController::class, 'index'])->name('artikel-index');
+Route::get('artikel_detil/{slug}', [ArtikelController::class, 'show'])->name('artikel-show');
+
+// Anggaran
+Route::get('anggaran/{kategori}', [AnggaranController::class, 'index'])->name('anggaran-index');
+Route::get('anggaran_detil/{slug}', [AnggaranController::class, 'show'])->name('anggaran-show');
+
+// Layanan SPBE
+Route::get('layanan_spbe/{kategori}/{jenis}', [LayananSpbeController::class, 'index'])->name('layanan-spbe-index');
+
+// Pengumuman
+Route::get('pengumuman', [PengumumanController::class, 'index'])->name('pengumuman-index');
+Route::get('pengumuman_detil/{slug}', [PengumumanController::class, 'show'])->name('pengumuman-show');
+
+// Agenda
+  Route::get('agenda', [AgendaController::class, 'index'])->name('agenda-index');
+
+// Produk Hukum
+  Route::get('produk_hukum/{kategori}', [ProdukHukumController::class, 'index'])->name('produk-hukum-index');
+  Route::get('produk_hukum_detil/{slug}', [ProdukHukumController::class, 'show'])->name('produk-hukum-show');
+
+// Perangkat Daerah
+Route::get('perangkat_daerah/{kategori?}', [PerangkatDaerahController::class, 'index'])->name('perangkat-daerah-index');
+Route::get('perangkat_daerah_detil/{slug}', [PerangkatDaerahController::class, 'show'])->name('perangkat-daerah-show');
+
+// Publikasi
+Route::get('publikasi', [PublikasiController::class, 'index'])->name('publikasi-index');
+Route::get('publikasi_detil/{slug}', [PublikasiController::class, 'show'])->name('publikasi-show');
+
+// Agenda Virtual Meeting
+  Route::get('virtual_meeting', [VirtualMeetingController::class, 'index'])->name('virtual-meeting-index');
+
+// Bank Data
+Route::get('bank_data/{kategori}', [BankDataController::class, 'index'])->name('bank-data-index');
+Route::get('bank_data_detil/{slug}', [BankDataController::class, 'show'])->name('bank-data-show');
+
+// Transparansi Anggaran
+Route::get('transparansi_anggaran/{kategori}', [TransparansiAnggaranController::class, 'index'])->name('transparansi-anggaran-index');
+Route::get('transparansi_anggaran_detil/{slug}', [TransparansiAnggaranController::class, 'show'])->name('transparansi-anggaran-show');
+
+
+// Konten : Profil
+Route::get('profil/{slug}', [KontenController::class, 'kontenProfil'])->name('konten-profil-index');
+// Konten : Potensi
+Route::get('potensi/{slug}', [KontenController::class, 'kontenPotensi'])->name('konten-potensi-index');
+// Konten : PPID
+Route::get('ppid/{slug}', [KontenController::class, 'kontenPpid'])->name('konten-ppid-index');
+
+// SITEMAP
+Route::get('sitemap', [HomeController::class, 'sitemap'])->name('sitemap');

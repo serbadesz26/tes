@@ -1,0 +1,193 @@
+{
+  "menu": [
+    {
+      "url": "/",
+      "name": "Home",
+      "icon": "home",
+      "slug": "home"
+    },
+    {
+      "name": "Profil",
+      "icon": "layout",
+      "dropdown": "1",
+      "slug": "",
+      "submenu": [
+        {
+          "url": "profil/sejarah-bumi-serumpun-sebalai",
+          "name": "Sekilas Sejarah",
+          "slug": "sejarah-bumi-serumpun-sebalai"
+        },
+        {
+          "url": "profil/visi-misi-pemerintah-provinsi",
+          "name": "Visi Misi",
+          "slug": "visi-misi-pemerintah-provinsi"
+        },
+        {
+          "url": "profil/lambang-daerah-dan-artinya",
+          "name": "Lambang Daerah",
+          "slug": "lambang-daerah-dan-artinya"
+        },
+        {
+          "url": "profil/struktur-organisasi-pemerintah-provinsi-kepulauan-bangka-belitung",
+          "name": "Struktur Organisasi",
+          "slug": "struktur-organisasi-pemerintah-provinsi-kepulauan-bangka-belitung"
+        },
+        {
+          "url": "profil/aspek-geografis",
+          "name": "Aspek Geografis",
+          "slug": "aspek-geografis"
+        },
+        {
+          "url": "profil/aspek-demografi",
+          "name": "Aspek Demografi",
+          "slug": "aspek-demografi"
+        },
+        {
+          "url": "profil/profil-pj-gubernur-kepulauan-bangka-belitung",
+          "name": "Profil Pj Gubernur",
+          "slug": "profil-pj-gubernur-kepulauan-bangka-belitung"
+        },
+       {
+          "url": "profil/profil-sekretaris-daerah-pemerintah-provinsi-kepulauan-bangka-belitung",
+          "name": "Profil Sekretaris Daerah",
+          "slug": "profil-sekretaris-daerah-pemerintah-provinsi-kepulauan-bangka-belitung"
+       },
+       {
+          "url": "perangkat_daerah/all",
+          "name": "Informasi Perangkat Daerah",
+          "slug": "perangkat_daerah/all"
+       }
+      ]
+    },
+    {
+      "name": "Potensi Investasi",
+      "icon": "layout",
+      "dropdown": "1",
+      "slug": "",
+      "submenu": [
+          {
+              "url": "potensi/menggali-potensi-memaksimalkan-investasi",
+              "name": "Potensi Investasi",
+              "slug": "menggali-potensi-memaksimalkan-investasi"
+          },
+          {
+              "url": "potensi/menuju-industri-40",
+              "name": "Menuju Industri 4.0",
+              "slug": "menuju-industri-40"
+          },
+          {
+              "url": "potensi/pertambangan-penyokong-perekonomian",
+              "name": "Pertambangan Penyokong Perekonomian",
+              "slug": "pertambangan-penyokong-perekonomian"
+          },
+          {
+              "url": "potensi/komoditas-unggulan-dan-perdagangan",
+              "name": "Komoditas Unggulan dan Perdagangan",
+              "slug": "komoditas-unggulan-dan-perdagangan"
+          },
+          {
+              "url": "potensi/perkembangan-expor-dan-impor",
+              "name": "Perkembangan Ekspor dan Impor",
+              "slug": "perkembangan-expor-dan-impor"
+          },
+          {
+              "url": "potensi/sektor-agrikultural",
+              "name": "Sektor Agrikultural",
+              "slug": "sektor-agrikultural"
+          },
+          {
+              "url": "potensi/sektor-peternakan-dan-perikanan",
+              "name": "Sektor Peternakan dan Perikanan",
+              "slug": "sektor-peternakan-dan-perikanan"
+          },
+          {
+              "url": "potensi/transportasi",
+              "name": "Transportasi",
+              "slug": "transportasi"
+          }
+      ]
+  },
+    {
+      "name": "Data & Informasi",
+      "icon": "database",
+      "dropdown": "1",
+      "slug": "",
+      "submenu": [
+          {
+              "url": "layanan_spbe/all/all",
+              "name": "Layanan SPBE",
+              "slug": "layanan_spbe/all/all"
+          },
+          {
+              "url": "bank_data/all",
+              "name": "Bank Data",
+              "slug": "bank_data/all"
+          },
+          {
+              "url": "berita/all",
+              "name": "Berita",
+              "slug": "berita/all"
+          },
+          {
+              "url": "artikel/all",
+              "name": "Artikel",
+              "slug": "artikel/all"
+          },
+          {
+              "url": "agenda?tahun=2022",
+              "name": "Agenda Kegiatan",
+              "slug": "agenda"
+          },
+          {
+              "url": "pengumuman",
+              "name": "Pengumuman",
+              "slug": "pengumuman"
+          },
+          {
+              "url": "produk_hukum/all",
+              "name": "Produk Hukum",
+              "slug": "produk_hukum/all"
+          },
+          {
+              "url": "virtual_meeting",
+              "name": "Agenda Virtual Meeting",
+              "slug": "virtual_meeting"
+          }
+      ]
+    },
+    {
+      "url": "https://portalppid.babelprov.go.id/",
+      "name": "PPID",
+      "icon": "layout",
+      "slug": ""
+    },
+    {
+          "name": "Publikasi",
+          "icon": "layout",
+          "dropdown": "1",
+          "slug": "",
+          "submenu": [
+              {
+                  "url": "publikasi?fltrKategori=Dokumen+Perencanaan&fltrSubKategori=&fltrTahun=",
+                  "name": "Dokumen Perencanaan",
+                  "slug": "publikasi?fltrKategori=Transparansi+Anggaran&fltrSubKategori=&fltrTahun="
+              },
+              {
+                  "url": "publikasi?fltrKategori=Transparansi+Anggaran&fltrSubKategori=&fltrTahun=",
+                  "name": "Transparansi Anggaran",
+                  "slug": "publikasi?fltrKategori=Dokumen+Perencanaan&fltrSubKategori=&fltrTahun="
+              },
+              {
+                  "url": "publikasi?fltrKategori=Statistik+Pegawai&fltrSubKategori=&fltrTahun=",
+                  "name": "Statistik Pegawai",
+                  "slug": "publikasi?fltrKategori=Statistik+Pegawai&fltrSubKategori=&fltrTahun="
+              },
+              {
+                  "url": "publikasi?fltrKategori=Laporan+Pertanggungjawaban&fltrSubKategori=&fltrTahun=",
+                  "name": "Laporan Pertanggungjawaban",
+                  "slug": "publikasi?fltrKategori=Laporan+Pertanggungjawaban&fltrSubKategori=&fltrTahun="
+              }
+          ]
+      }
+  ]
+}
